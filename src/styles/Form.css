@@ -1,0 +1,108 @@
+/* Form.css */
+
+.right-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.form-container {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 500px;
+}
+
+.field {
+  margin: 10px;
+}
+
+.form-input,
+input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.form-input {
+  width: 400px;
+  height: 25px;
+  margin: 5px;
+  padding: 5px 10px;
+  background: #ffffff;
+  color: #636973;
+  border: 1px solid #cbcdd3; ;
+  border-radius: 4px;
+  outline: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.css-1jqq78o-placeholder, input::placeholder {
+    color: #b0b5bc;
+}
+
+.border-error {
+    border: 3px solid #DCA592;
+}
+
+.error {
+  color: #d94b4b;
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 5px;
+}
+
+.sticky-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 96px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.go-back-button, .save-continue-button {
+  padding: 12px 28px;
+  margin: 0 auto;
+  width: 198px;
+  height: 48px;
+  border-radius: 34px;
+  border: 0px;
+  font-family: 'Nunito Sans';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.save-continue-button {
+  background: #F18A8D;
+  color: #FFF;
+}
+
+.go-back-button {
+  background: #E5E6E9;
+  color: #F18A8D;
+}
+
+.go-back-button:hover {
+  background: #F18A8D;
+  color: #FFF;
+}
+
+.save-continue-button:hover {
+  background: #f0777b;
+}
+
+.save-continue-button:disabled {
+  background-color: #FCE8E8;;
+  cursor: not-allowed;
+}
