@@ -74,7 +74,7 @@ input::placeholder {
   gap: 10px;
 }
 
-.go-back-button, .save-continue-button, .start-button {
+.go-back-button, .save-continue-button, .restart-button {
   padding: 12px 28px;
   margin: 0 auto;
   width: 198px;
@@ -87,7 +87,7 @@ input::placeholder {
   line-height: 24px;
 }
 
-.save-continue-button, .start-button {
+.save-continue-button, .restart-button {
   background: #F18A8D;
   color: #FFF;
 }
@@ -102,7 +102,7 @@ input::placeholder {
   color: #FFF;
 }
 
-.save-continue-button:hover, .start-button:hover {
+.save-continue-button:hover, .restart-button:hover {
   background: #f0777b;
 }
 
@@ -111,6 +111,6 @@ input::placeholder {
   cursor: not-allowed;
 }
 
-.start-button {
+.restart-button {
   margin: 20px;
 }

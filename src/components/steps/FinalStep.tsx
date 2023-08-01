@@ -2,8 +2,8 @@ const FinalStep = () => {
 
   return (
     <div>
-      <button type="button" className="start-button">
-        Start again
+      <button type="button" className="restart-button">
+        Restart questionnaire
       </button>
     </div>
   );
