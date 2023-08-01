@@ -9,32 +9,29 @@ const Wizard = () => {
   const [steps, setSteps] = useState(stepsData);
   const [activeStep, setActiveStep] = useState(steps[0]);
 
+  const updateSteps = (stepKey: number, isDone: boolean) => {
+    setSteps((prevSteps) =>
+      prevSteps.map((step) =>
+        step.key === stepKey ? { ...step, isDone } : step
+      )
+    );
+    const index = steps.findIndex((step) => step.key === activeStep.key);
+    setActiveStep(isDone ? steps[index - 1] : steps[index + 1]);
+  };
+
   const handleNext = () => {
     if (steps[steps.length - 1].key === activeStep.key) {
       return;
     }
-
-    const index = steps.findIndex((step) => step.key === activeStep.key);
-    setSteps((prevStep) =>
-      prevStep.map((step) => {
-        if (step.key === activeStep.key) step.isDone = true;
-        return step;
-      })
-    );
-    setActiveStep(steps[index + 1]);
+    updateSteps(activeStep.key, false);
   };
 
   const handleBack = () => {
     const index = steps.findIndex((step) => step.key === activeStep.key);
-    if (index === 0) return;
-
-    setSteps((prevStep) =>
-      prevStep.map((step) => {
-        if (step.key === activeStep.key) step.isDone = false;
-        return step;
-      })
-    );
-    setActiveStep(steps[index - 1]);
+    if (index === 0) {
+      return;
+    }
+    updateSteps(activeStep.key, true);
   };
 
   const stepProps = {
