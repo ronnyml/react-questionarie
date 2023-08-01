@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Select, { ActionMeta } from "react-select";
 
-import { Option } from "../../types/option.type";
+import { Option } from "types/option.type";
 
-import { ProviderData } from "../../types/form.types";
-import { multiDropdownStyles } from "../../styles/customStyles";
-import { insurances, specialities } from "../../data/data";
-import { REQUIRED_FIELD } from "../../utils/constants";
+import { ProviderData } from "types/form.types";
+import { multiDropdownStyles } from "styles/customStyles";
+import { insurances, specialities } from "data/data";
+import { REQUIRED_FIELD } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { StickyBarProps } from "../../types/step.type";
-import "../styles/Form.css";
+import { StickyBarProps } from "types/step.type";
+import "styles/Form.css";
 
 const SecondStep: React.FC<StickyBarProps> = ({
   step,

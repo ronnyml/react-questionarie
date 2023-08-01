@@ -3,7 +3,7 @@ import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
 
-import { stepsData } from "../data/steps";
+import { stepsData } from "data/steps";
 
 const Wizard = () => {
   const [steps, setSteps] = useState(stepsData);

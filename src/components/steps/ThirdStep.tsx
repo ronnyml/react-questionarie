@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { ContactData } from "../../types/form.types";
-import { isValidEmail } from "../../utils/validators";
-import { REQUIRED_FIELD, INVALID_EMAIL } from "../../utils/constants";
+import { ContactData } from "types/form.types";
+import { isValidEmail } from "utils/validators";
+import { REQUIRED_FIELD, INVALID_EMAIL } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { StickyBarProps } from "../../types/step.type";
-import "../styles/Form.css";
+import { StickyBarProps } from "types/step.type";
+import "styles/Form.css";
 
 const ThirdStep: React.FC<StickyBarProps> = ({
   step,

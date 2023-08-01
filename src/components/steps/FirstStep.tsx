@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-import { PersonalData } from "../../types/form.types";
-import { multiDropdownStyles, errorStyles } from "../../styles/customStyles";
-import { languages } from "../../data/data";
-import { isValidPhoneNumber } from "../../utils/validators";
-import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "../../utils/constants";
+import { PersonalData } from "types/form.types";
+import { multiDropdownStyles, errorStyles } from "styles/customStyles";
+import { languages } from "data/data";
+import { isValidPhoneNumber } from "utils/validators";
+import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { StickyBarProps } from "../../types/step.type";
-import "../styles/Form.css";
+import { StickyBarProps } from "types/step.type";
+import "styles/Form.css";
 
 const FirstStep: React.FC<StickyBarProps> = ({
   step,

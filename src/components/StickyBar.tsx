@@ -1,4 +1,4 @@
-import { StickyBarProps } from "../types/step.type";
+import { StickyBarProps } from "types/step.type";
 
 const StickyBar: React.FC<StickyBarProps> = ({
   step,

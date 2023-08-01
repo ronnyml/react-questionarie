@@ -1,4 +1,4 @@
-import { Option } from "../types/option.type";
+import { Option } from "types/option.type";
 
 export const languages: Option[] = [
   { value: "spanish", label: "Spanish" },

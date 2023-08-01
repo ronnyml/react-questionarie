@@ -1,5 +1,5 @@
 import { StylesConfig } from "react-select";
-import { Option } from "../types/option.type";
+import { Option } from "types/option.type";
 
 export const multiDropdownStyles: StylesConfig<Option, true> = {
   control: (styles, state) => ({
