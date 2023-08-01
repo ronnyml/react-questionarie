@@ -1,7 +1,7 @@
 import { StylesConfig } from "react-select";
-import { LanguageOption } from "../interfaces/language.interface";
+import { Option } from "../types/option.type";
 
-export const multiDropdownStyles: StylesConfig<LanguageOption, true> = {
+export const multiDropdownStyles: StylesConfig<Option, true> = {
   control: (styles, state) => ({
     ...styles,
     width: "425px",
@@ -55,7 +55,7 @@ export const multiDropdownStyles: StylesConfig<LanguageOption, true> = {
   })
 };
 
-export const errorStyles: StylesConfig<LanguageOption, true> = {
+export const errorStyles: StylesConfig<Option, true> = {
   control: (styles) => ({
     ...styles,
     border: "3px solid #DCA592 !important",

@@ -86,7 +86,7 @@ body {
   color: #969CA6;
 }
 
-.active {
+.circle-active, .step-done {
   background-color: #DCA592;
   color: #fff;
 }
@@ -107,6 +107,7 @@ body {
 
 .title, .subtitle {
   color: #191A1D;
+  text-align: center;
 }
 
 .title {
@@ -124,4 +125,10 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+}
+
+.no-display {
+  display: block;
+  width: 50%;
+  visibility: hidden;
 }

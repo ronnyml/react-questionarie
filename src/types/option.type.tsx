@@ -1,4 +1,4 @@
-export interface LanguageOption {
+export type Option = {
   value: string;
   label: string;
 }
