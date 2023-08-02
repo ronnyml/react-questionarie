@@ -114,3 +114,44 @@ input::placeholder {
 .restart-button {
   margin: 20px;
 }
+
+@media only screen and (max-width: 900px) {
+
+  .form-container {
+    width: 100%;
+  }
+
+  .form-input {
+    width: 300px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .sticky-bottom-bar {
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  .go-back-button, .save-continue-button, .restart-button {
+    width: 350px;
+    margin: 0 auto;
+  }
+
+  .save-continue-button {
+    margin-right: auto;
+    order: 1;
+  }
+
+  .go-back-button {
+    margin-left: auto;
+    order: 2;
+  }
+
+  .restart-button {
+    margin: 20px auto;
+  }
+}

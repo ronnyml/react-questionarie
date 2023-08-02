@@ -1,10 +1,14 @@
 import { StylesConfig } from "react-select";
 import { Option } from "types/option.type";
+import { isMobileDevice } from "utils/utils";
+
+const isMobile = isMobileDevice();
 
 export const multiDropdownStyles: StylesConfig<Option, true> = {
-  control: (styles, state) => ({
+
+  control: (styles) => ({
     ...styles,
-    width: "425px",
+    width: isMobile ? "320px" : "425px",
     margin: "5px",
     borderRadius: "4px",
     fontFamily: "Nunito Sans",

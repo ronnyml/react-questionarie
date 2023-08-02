@@ -82,7 +82,6 @@ const FirstStep: React.FC<WizardProps> = ({
   return (
     <div className="right-container">
       <div className="form-container">
-        <h1>{formData.firstName}</h1>
         <form id="form" onSubmit={handleSubmit}>
           <div className="field">
             <input
@@ -149,7 +148,7 @@ const FirstStep: React.FC<WizardProps> = ({
             {errors.phoneNumber && (
               <span className="error">{errors.phoneNumber}</span>
             )}
-          </div>
+            </div>
         </form>
 
         <StickyBar
