@@ -7,14 +7,14 @@ import { languages } from "data/data";
 import { isValidPhoneNumber } from "utils/validators";
 import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { StickyBarProps } from "types/step.type";
+import { WizardProps } from "types/step.type";
 import "styles/Form.css";
 
-const FirstStep: React.FC<StickyBarProps> = ({
+const FirstStep: React.FC<WizardProps> = ({
   step,
   numSteps,
   handleNext,
-  handleBack,
+  handleBack
 }) => {
   const [formData, setFormData] = useState<PersonalData>({
     firstName: "",
@@ -66,6 +66,7 @@ const FirstStep: React.FC<StickyBarProps> = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log("Form data:", formData);
+    handleNext?.();
   };
 
   const customStyles = errors.languages
@@ -85,7 +86,7 @@ const FirstStep: React.FC<StickyBarProps> = ({
   return (
     <div className="right-container">
       <div className="form-container">
-        <form>
+        <form id="form" onSubmit={handleSubmit}>
           <div className="field">
             <input
               type="text"
@@ -154,11 +155,11 @@ const FirstStep: React.FC<StickyBarProps> = ({
         </form>
 
         <StickyBar
-            numSteps={numSteps} 
-            step={step}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            isFormValid={isFormValid()} />
+          numSteps={numSteps}
+          step={step}
+          handleBack={handleBack}
+          isFormValid={isFormValid()}
+        />
       </div>
     </div>
   );

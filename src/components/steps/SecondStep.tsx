@@ -8,14 +8,14 @@ import { multiDropdownStyles } from "styles/customStyles";
 import { insurances, specialities } from "data/data";
 import { REQUIRED_FIELD } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { StickyBarProps } from "types/step.type";
+import { WizardProps } from "types/step.type";
 import "styles/Form.css";
 
-const SecondStep: React.FC<StickyBarProps> = ({
+const SecondStep: React.FC<WizardProps> = ({
   step,
   numSteps,
   handleNext,
-  handleBack,
+  handleBack
 }) => {
   const [formData, setFormData] = useState<ProviderData>({
     insurance: "",
@@ -72,6 +72,7 @@ const SecondStep: React.FC<StickyBarProps> = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log("Form data:", formData);
+    handleNext?.();
   };
 
   const isFormValid = () => {
@@ -82,7 +83,7 @@ const SecondStep: React.FC<StickyBarProps> = ({
   return (
     <div className="right-container">
       <div className="form-container">
-        <form>
+        <form id="form" onSubmit={handleSubmit}>
           <div className="field">
             <Select
               name="insurance"
@@ -132,11 +133,11 @@ const SecondStep: React.FC<StickyBarProps> = ({
         </form>
 
         <StickyBar
-            numSteps={numSteps} 
-            step={step}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            isFormValid={isFormValid()} />
+          numSteps={numSteps}
+          step={step}
+          handleBack={handleBack}
+          isFormValid={isFormValid()}
+        />
       </div>
     </div>
   );

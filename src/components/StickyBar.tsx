@@ -1,11 +1,10 @@
-import { StickyBarProps } from "types/step.type";
+import { WizardProps } from "types/step.type";
 
-const StickyBar: React.FC<StickyBarProps> = ({
+const StickyBar: React.FC<WizardProps> = ({
   step,
   numSteps,
-  handleNext,
   handleBack,
-  isFormValid,
+  isFormValid
 }) => {
   return (
     <div className="sticky-bottom-bar">
@@ -14,11 +13,12 @@ const StickyBar: React.FC<StickyBarProps> = ({
         onClick={handleBack}
         className={`go-back-button ${step.key === 1 ? "no-display" : ""}`}
       >
-        Go Back {step.key}
+        Go Back
       </button>
+
       <button
-        type="button"
-        onClick={handleNext}
+        type="submit"
+        form="form"
         disabled={!isFormValid}
         className={`save-continue-button ${step.key === numSteps ? "no-display" : ""}`}
       >

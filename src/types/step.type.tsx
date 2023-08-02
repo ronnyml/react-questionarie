@@ -6,7 +6,7 @@ export type Step = {
   isDone: boolean;
 };
 
-export type StickyBarProps = {
+export type WizardProps = {
   step: Step;
   numSteps: number;
   handleNext?: () => void;
