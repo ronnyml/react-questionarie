@@ -1,21 +1,21 @@
 import { createContext, useContext, useState } from "react";
 
 interface FormContextData {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  resetFormData: () => void;
+  formData: FormData
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>
+  resetFormData: () => void
 }
 
 interface FormData {
-  firstName: string;
-  lastName: string;
-  languages: [];
-  phoneNumber: string;
-  insurance: string;
-  speciality: string;
-  description: string;
-  email: string;
-  address: string;
+  firstName: string
+  lastName: string
+  languages: []
+  phoneNumber: string
+  insurance: string
+  speciality: string
+  description: string
+  email: string
+  address: string
 }
 
 export const initialState: FormData = {
@@ -27,7 +27,7 @@ export const initialState: FormData = {
   speciality: "",
   description: "",
   email: "",
-  address: "",
+  address: ""
 };
 
 const FormContext = createContext<FormContextData>({
@@ -38,9 +38,9 @@ const FormContext = createContext<FormContextData>({
 
 export const useFormContext = () => {
   return useContext(FormContext);
-}
+};
 
-export const FormContextProvider = ({children}: {children: React.ReactNode}) => {
+export const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [formData, setFormData] = useState<FormData>(initialState);
   const resetFormData = () => {
     setFormData(initialState);
@@ -51,4 +51,4 @@ export const FormContextProvider = ({children}: {children: React.ReactNode}) => 
       {children}
     </FormContext.Provider>
   );
-}
+};

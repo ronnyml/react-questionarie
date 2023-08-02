@@ -1,5 +1,5 @@
-import { StylesConfig } from "react-select";
-import { Option } from "types/option.type";
+import { type StylesConfig } from "react-select";
+import { type Option } from "types/option.type";
 import { isMobileDevice } from "utils/utils";
 
 const isMobile = isMobileDevice();
@@ -18,7 +18,7 @@ export const multiDropdownStyles: StylesConfig<Option, true> = {
     border: "1px solid #CBCDD3",
     boxShadow: "0 !important",
     "&:hover": {
-      border: "0 !important",
+      border: "0 !important"
     },
     filter:
       "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
@@ -49,7 +49,7 @@ export const multiDropdownStyles: StylesConfig<Option, true> = {
 
     fontWeight: "600",
     fontSize: "12px",
-    lineHeight: "16px",
+    lineHeight: "16px"
   }),
   multiValueRemove: (styles) => ({
     ...styles,
@@ -65,7 +65,7 @@ export const errorStyles: StylesConfig<Option, true> = {
     border: "3px solid #DCA592 !important",
     boxShadow: "0 !important",
     "&:hover": {
-      boxShadow: "0 !important",
+      boxShadow: "0 !important"
     }
   })
 };

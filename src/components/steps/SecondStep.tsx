@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import Select, { ActionMeta } from "react-select";
+import Select, { type ActionMeta } from "react-select";
 
-import { Option } from "types/option.type";
-
-import { ProviderData } from "types/form.types";
 import { multiDropdownStyles } from "styles/customStyles";
 import { insurances, specialities } from "data/data";
 import { REQUIRED_FIELD } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { WizardProps } from "types/step.type";
+import { type Option } from "types/option.type";
+import { type ProviderData } from "types/form.types";
+import { type WizardProps } from "types/step.type";
 import "styles/Form.css";
 import { useFormContext } from "context/AppContext";
 
@@ -22,7 +21,7 @@ const SecondStep: React.FC<WizardProps> = ({
   const [errors, setErrors] = useState<ProviderData>({
     insurance: "",
     speciality: "",
-    description: "",
+    description: ""
   });
 
   const handleChange = (
@@ -43,7 +42,7 @@ const SecondStep: React.FC<WizardProps> = ({
     const fieldsToCheck: ProviderData = {
       insurance: formData.insurance,
       speciality: formData.speciality,
-      description: formData.description,
+      description: formData.description
     };
 
     if (!fieldsToCheck[fieldName]) {

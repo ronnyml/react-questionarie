@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import Wizard from "./components/Wizard";
 
-function App() {
+function App () {
   return (
     <div className="container">
       <div className="left-column"></div>

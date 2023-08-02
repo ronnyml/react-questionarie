@@ -6,10 +6,9 @@ import { languages } from "data/data";
 import { isValidPhoneNumber } from "utils/validators";
 import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { WizardProps } from "types/step.type";
+import { type WizardProps } from "types/step.type";
 import "styles/Form.css";
 import { useFormContext } from "context/AppContext";
-
 
 const FirstStep: React.FC<WizardProps> = ({
   step,
@@ -17,13 +16,12 @@ const FirstStep: React.FC<WizardProps> = ({
   handleNext,
   handleBack
 }) => {
-
   const { formData, setFormData } = useFormContext();
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
     languages: "",
-    phoneNumber: "",
+    phoneNumber: ""
   });
 
   const handleLanguageChange = (selectedOptions: any) => {
@@ -65,7 +63,7 @@ const FirstStep: React.FC<WizardProps> = ({
     handleNext?.();
   };
 
-  const customStyles = errors.languages
+  const customStyles = (errors.languages.length > 0)
     ? { ...multiDropdownStyles, ...errorStyles }
     : multiDropdownStyles;
 

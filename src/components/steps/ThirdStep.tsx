@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { ContactData } from "types/form.types";
 import { isValidEmail } from "utils/validators";
 import { REQUIRED_FIELD, INVALID_EMAIL } from "utils/constants";
 import StickyBar from "../StickyBar";
-import { WizardProps } from "types/step.type";
+import { type ContactData } from "types/form.types";
+import { type WizardProps } from "types/step.type";
 import "styles/Form.css";
 import { useFormContext } from "context/AppContext";
 
@@ -11,12 +11,12 @@ const ThirdStep: React.FC<WizardProps> = ({
   step,
   numSteps,
   handleNext,
-  handleBack,
+  handleBack
 }) => {
   const { formData, setFormData } = useFormContext();
   const [errors, setErrors] = useState<ContactData>({
     email: "",
-    address: "",
+    address: ""
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
