@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-import { PersonalData } from "types/form.types";
 import { multiDropdownStyles, errorStyles } from "styles/customStyles";
 import { languages } from "data/data";
 import { isValidPhoneNumber } from "utils/validators";
@@ -9,6 +8,8 @@ import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "utils/constants";
 import StickyBar from "../StickyBar";
 import { WizardProps } from "types/step.type";
 import "styles/Form.css";
+import { useFormContext } from "context/AppContext";
+
 
 const FirstStep: React.FC<WizardProps> = ({
   step,
@@ -16,13 +17,8 @@ const FirstStep: React.FC<WizardProps> = ({
   handleNext,
   handleBack
 }) => {
-  const [formData, setFormData] = useState<PersonalData>({
-    firstName: "",
-    lastName: "",
-    languages: [],
-    phoneNumber: "",
-  });
 
+  const { formData, setFormData } = useFormContext();
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -31,7 +27,7 @@ const FirstStep: React.FC<WizardProps> = ({
   });
 
   const handleLanguageChange = (selectedOptions: any) => {
-    setFormData({ ...formData, languages: selectedOptions });
+    setFormData((prevData) => ({ ...prevData, languages: selectedOptions }));
     setErrors({ ...errors, languages: "" });
     if (selectedOptions.length === 0) {
       setErrors({ ...errors, languages: REQUIRED_FIELD });
@@ -40,7 +36,7 @@ const FirstStep: React.FC<WizardProps> = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (value) {
       setErrors({ ...errors, [name]: "" });
     }
@@ -86,6 +82,7 @@ const FirstStep: React.FC<WizardProps> = ({
   return (
     <div className="right-container">
       <div className="form-container">
+        <h1>{formData.firstName}</h1>
         <form id="form" onSubmit={handleSubmit}>
           <div className="field">
             <input
@@ -123,6 +120,7 @@ const FirstStep: React.FC<WizardProps> = ({
               isMulti
               isSearchable
               name="languages"
+              value={formData.languages}
               options={languages}
               onChange={handleLanguageChange}
               placeholder="Add language"

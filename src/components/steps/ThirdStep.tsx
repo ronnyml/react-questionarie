@@ -5,6 +5,7 @@ import { REQUIRED_FIELD, INVALID_EMAIL } from "utils/constants";
 import StickyBar from "../StickyBar";
 import { WizardProps } from "types/step.type";
 import "styles/Form.css";
+import { useFormContext } from "context/AppContext";
 
 const ThirdStep: React.FC<WizardProps> = ({
   step,
@@ -12,11 +13,7 @@ const ThirdStep: React.FC<WizardProps> = ({
   handleNext,
   handleBack,
 }) => {
-  const [formData, setFormData] = useState<ContactData>({
-    email: "",
-    address: "",
-  });
-
+  const { formData, setFormData } = useFormContext();
   const [errors, setErrors] = useState<ContactData>({
     email: "",
     address: "",
@@ -24,7 +21,7 @@ const ThirdStep: React.FC<WizardProps> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (!value) {
       setErrors({ ...errors, [name]: REQUIRED_FIELD });
     } else if (name === "email" && !isValidEmail(value)) {

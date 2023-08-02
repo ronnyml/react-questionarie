@@ -10,6 +10,7 @@ import { REQUIRED_FIELD } from "utils/constants";
 import StickyBar from "../StickyBar";
 import { WizardProps } from "types/step.type";
 import "styles/Form.css";
+import { useFormContext } from "context/AppContext";
 
 const SecondStep: React.FC<WizardProps> = ({
   step,
@@ -17,12 +18,7 @@ const SecondStep: React.FC<WizardProps> = ({
   handleNext,
   handleBack
 }) => {
-  const [formData, setFormData] = useState<ProviderData>({
-    insurance: "",
-    speciality: "",
-    description: "",
-  });
-
+  const { formData, setFormData } = useFormContext();
   const [errors, setErrors] = useState<ProviderData>({
     insurance: "",
     speciality: "",
@@ -36,7 +32,7 @@ const SecondStep: React.FC<WizardProps> = ({
     if (selectedOption) {
       const name = actionMeta.name;
       const value = selectedOption.value;
-      setFormData({ ...formData, [name as string]: value });
+      setFormData((prevData) => ({ ...prevData, [name as string]: value }));
       if (value) {
         setErrors({ ...errors, [name as string]: "" });
       }
@@ -57,11 +53,9 @@ const SecondStep: React.FC<WizardProps> = ({
     }
   };
 
-  const handleTextAreaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (!value) {
       setErrors({ ...errors, description: REQUIRED_FIELD });
     } else {
@@ -87,6 +81,7 @@ const SecondStep: React.FC<WizardProps> = ({
           <div className="field">
             <Select
               name="insurance"
+              value={insurances.find(i => i.value === formData.insurance)}
               options={insurances}
               placeholder="Insurance"
               onChange={handleChange}
@@ -102,6 +97,7 @@ const SecondStep: React.FC<WizardProps> = ({
           <div className="field">
             <Select
               name="speciality"
+              defaultValue={specialities.find(s => s.value === formData.speciality)}
               options={specialities}
               placeholder="Speciality"
               onChange={handleChange}

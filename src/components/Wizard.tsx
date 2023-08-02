@@ -3,8 +3,8 @@ import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
 import FinalStep from "./steps/FinalStep";
-
 import { stepsData } from "data/steps";
+import { FormContextProvider } from "context/AppContext";
 
 
 const Wizard = () => {
@@ -36,8 +36,16 @@ const Wizard = () => {
   };
 
   const restart = () => {
-    setActiveStep(steps[0])
-  }
+    setSteps((prevSteps) =>
+      prevSteps.map((step, index) => {
+        return {
+          ...step,
+          isDone: index === 0,
+        };
+      })
+    );
+    setActiveStep(steps[0]);
+  };
 
   const stepProps = {
     step: activeStep,
@@ -47,18 +55,19 @@ const Wizard = () => {
     isFormValid: false,
   };
 
-  const renderActiveStepComponent = () => {
-    switch (activeStep.key) {
-      case 1:
-        return <FirstStep {...stepProps } />;
-      case 2:
-        return <SecondStep {...stepProps } />;
-      case 3:
-        return <ThirdStep {...stepProps } />;
-      default:
-        return <FinalStep restart={restart} />;
-    }
-  };
+  const renderActiveStepComponent = () => (
+    <FormContextProvider>
+      {activeStep.key === 1 ? (
+        <FirstStep {...stepProps} />
+      ) : activeStep.key === 2 ? (
+        <SecondStep {...stepProps} />
+      ) : activeStep.key === 3 ? (
+        <ThirdStep {...stepProps} />
+      ) : (
+        <FinalStep restart={restart} />
+      )}
+    </FormContextProvider>
+  );
 
   return (
     <>
