@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Select from "react-select";
 
 import { multiDropdownStyles, errorStyles } from "styles/customStyles";
@@ -24,58 +24,64 @@ const FirstStep: React.FC<WizardProps> = ({
     phoneNumber: ""
   });
 
-  const handleLanguageChange = (selectedOptions: any) => {
+  const handleLanguageChange = useCallback((selectedOptions: any) => {
     setFormData((prevData) => ({ ...prevData, languages: selectedOptions }));
-    setErrors({ ...errors, languages: "" });
+    setErrors((prevErrors) => ({ ...prevErrors, languages: "" }));
     if (selectedOptions.length === 0) {
-      setErrors({ ...errors, languages: REQUIRED_FIELD });
+      setErrors((prevErrors) => ({ ...prevErrors, languages: REQUIRED_FIELD }));
     }
-  };
+  }, [setFormData]
+  );
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    if (value) {
-      setErrors({ ...errors, [name]: "" });
+    if (value !== "") {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     }
-  };
+  }, [setFormData]
+  );
 
-  const handleLanguageBlur = () => {
+  const handleLanguageBlur = useCallback(() => {
     if (formData.languages.length === 0) {
-      setErrors({ ...errors, languages: REQUIRED_FIELD });
+      setErrors((prevErrors) => ({ ...prevErrors, languages: REQUIRED_FIELD }));
     }
-  };
+  }, [formData]);
 
-  const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const handleInputBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (!value) {
-      setErrors({ ...errors, [name]: REQUIRED_FIELD });
+    if (value === "") {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: REQUIRED_FIELD }));
     } else if (name === "phoneNumber" && !isValidPhoneNumber(value)) {
-      setErrors({ ...errors, phoneNumber: INVALID_PHONE_NUMBER });
+      setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: INVALID_PHONE_NUMBER }));
     } else {
-      setErrors({ ...errors, [name]: "" });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     }
-  };
+  }, []
+  );
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     console.log("Form data:", formData);
     handleNext?.();
-  };
+  }, [handleNext, formData]
+  );
 
-  const customStyles = (errors.languages.length > 0)
-    ? { ...multiDropdownStyles, ...errorStyles }
-    : multiDropdownStyles;
+  const customStyles = useMemo(() => {
+    return errors.languages.length > 0
+      ? { ...multiDropdownStyles, ...errorStyles }
+      : multiDropdownStyles;
+  }, [errors.languages]);
 
-  const isFormValid = (): boolean => {
+  const isFormValid = useMemo(() => {
     const { firstName, lastName, languages, phoneNumber } = formData;
     return (
-      !!firstName &&
-      !!lastName &&
+      !(firstName === "") &&
+      !(lastName === "") &&
       languages.length > 0 &&
       isValidPhoneNumber(phoneNumber)
     );
-  };
+  }, [formData]);
 
   return (
     <div className="right-container">
@@ -84,7 +90,7 @@ const FirstStep: React.FC<WizardProps> = ({
           <div className="field">
             <input
               type="text"
-              className={`form-input ${errors.firstName ? "border-error" : ""}`}
+              className={`form-input ${errors.firstName !== "" ? "border-error" : ""}`}
               name="firstName"
               value={formData.firstName}
               onChange={handleInputChange}
@@ -92,14 +98,14 @@ const FirstStep: React.FC<WizardProps> = ({
               placeholder="First Name"
               required
             />
-            {errors.firstName && (
+            {(errors.firstName !== "") && (
               <span className="error">{errors.firstName}</span>
             )}
           </div>
           <div className="field">
             <input
               type="text"
-              className={`form-input ${errors.lastName ? "border-error" : ""}`}
+              className={`form-input ${(errors.lastName !== "") ? "border-error" : ""}`}
               name="lastName"
               value={formData.lastName}
               onChange={handleInputChange}
@@ -107,7 +113,7 @@ const FirstStep: React.FC<WizardProps> = ({
               placeholder="Last Name"
               required
             />
-            {errors.lastName && (
+            {(errors.lastName !== "") && (
               <span className="error">{errors.lastName}</span>
             )}
           </div>
@@ -125,7 +131,7 @@ const FirstStep: React.FC<WizardProps> = ({
               styles={customStyles}
               required
             />
-            {errors.languages && (
+            {(errors.languages !== "") && (
               <span className="error">{errors.languages}</span>
             )}
           </div>
@@ -134,7 +140,7 @@ const FirstStep: React.FC<WizardProps> = ({
             <input
               type="text"
               className={`form-input ${
-                errors.phoneNumber ? "border-error" : ""
+                (errors.phoneNumber !== "") ? "border-error" : ""
               }`}
               name="phoneNumber"
               value={formData.phoneNumber}
@@ -143,7 +149,7 @@ const FirstStep: React.FC<WizardProps> = ({
               placeholder="Phone Number"
               required
             />
-            {errors.phoneNumber && (
+            {(errors.phoneNumber !== "") && (
               <span className="error">{errors.phoneNumber}</span>
             )}
             </div>
@@ -153,7 +159,7 @@ const FirstStep: React.FC<WizardProps> = ({
           numSteps={numSteps}
           step={step}
           handleBack={handleBack}
-          isFormValid={isFormValid()}
+          isFormValid={isFormValid}
         />
       </div>
     </div>

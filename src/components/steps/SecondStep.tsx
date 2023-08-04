@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Select, { type ActionMeta } from "react-select";
 
 import { multiDropdownStyles } from "styles/customStyles";
@@ -24,54 +24,48 @@ const SecondStep: React.FC<WizardProps> = ({
     description: ""
   });
 
-  const handleChange = (
-    selectedOption: any,
-    actionMeta: ActionMeta<Option>
-  ) => {
+  const handleChange = useCallback((selectedOption: any, actionMeta: ActionMeta<Option>) => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (selectedOption) {
-      const name = actionMeta.name;
+      const { name } = actionMeta;
       const value = selectedOption.value;
       setFormData((prevData) => ({ ...prevData, [name as string]: value }));
-      if (value) {
-        setErrors({ ...errors, [name as string]: "" });
-      }
+      setErrors((prevErrors) => ({ ...prevErrors, [name as string]: "" }));
     }
-  };
+  }, [setFormData]
+  );
 
-  const handleBlur = (fieldName: keyof ProviderData) => () => {
-    const fieldsToCheck: ProviderData = {
-      insurance: formData.insurance,
-      speciality: formData.speciality,
-      description: formData.description
-    };
-
-    if (!fieldsToCheck[fieldName]) {
-      setErrors({ ...errors, [fieldName]: REQUIRED_FIELD });
+  const handleBlur = useCallback((fieldName: keyof ProviderData) => () => {
+    const fieldValue = formData[fieldName];
+    if (fieldValue === "") {
+      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: REQUIRED_FIELD }));
     } else {
-      setErrors({ ...errors, [fieldName]: "" });
+      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: "" }));
     }
-  };
+  }, [formData]
+  );
 
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextAreaChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    if (!value) {
-      setErrors({ ...errors, description: REQUIRED_FIELD });
-    } else {
-      setErrors({ ...errors, [name]: "" });
-    }
-  };
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      description: (value !== "") ? "" : REQUIRED_FIELD
+    }));
+  }, [setFormData]
+  );
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     console.log("Form data:", formData);
     handleNext?.();
-  };
+  }, [handleNext, formData]
+  );
 
-  const isFormValid = () => {
+  const isFormValid = useMemo(() => {
     const { insurance, speciality, description } = formData;
-    return (!!insurance && !!speciality && !!description);
-  };
+    return !!((insurance !== "") && (speciality !== "") && (description !== ""));
+  }, [formData]);
 
   return (
     <div className="right-container">
@@ -88,7 +82,7 @@ const SecondStep: React.FC<WizardProps> = ({
               styles={multiDropdownStyles}
               required
             />
-            {errors.insurance && (
+            {(errors.insurance !== "") && (
               <span className="error">{errors.insurance}</span>
             )}
           </div>
@@ -104,7 +98,7 @@ const SecondStep: React.FC<WizardProps> = ({
               styles={multiDropdownStyles}
               required
             />
-            {errors.speciality && (
+            {(errors.speciality !== "") && (
               <span className="error">{errors.speciality}</span>
             )}
           </div>
@@ -112,7 +106,7 @@ const SecondStep: React.FC<WizardProps> = ({
           <div className="field">
             <textarea
               className={`form-input textarea ${
-                errors.description ? "border-error" : ""
+                (errors.description !== "") ? "border-error" : ""
               }`}
               name="description"
               value={formData.description}
@@ -121,7 +115,7 @@ const SecondStep: React.FC<WizardProps> = ({
               placeholder="Tell us about yourself."
               required
             />
-            {errors.description && (
+            {(errors.description !== "") && (
               <span className="error">{errors.description}</span>
             )}
           </div>
@@ -131,7 +125,7 @@ const SecondStep: React.FC<WizardProps> = ({
           numSteps={numSteps}
           step={step}
           handleBack={handleBack}
-          isFormValid={isFormValid()}
+          isFormValid={isFormValid}
         />
       </div>
     </div>
