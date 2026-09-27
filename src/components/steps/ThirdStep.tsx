@@ -44,9 +44,8 @@ const ThirdStep: React.FC<WizardProps> = ({
 
   const handleSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Form data:", formData);
     handleNext?.();
-  }, [handleNext, formData]
+  }, [handleNext]
   );
 
   const isFormValid = useMemo(() => {
