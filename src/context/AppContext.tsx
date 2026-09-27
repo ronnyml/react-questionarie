@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { type Option } from "types/option.type";
 
 interface FormContextData {
   formData: FormData
@@ -9,7 +10,7 @@ interface FormContextData {
 interface FormData {
   firstName: string
   lastName: string
-  languages: []
+  languages: Option[]
   phoneNumber: string
   insurance: string
   speciality: string

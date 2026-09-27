@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import Select from "react-select";
+import Select, { type MultiValue } from "react-select";
 
 import { multiDropdownStyles, errorStyles } from "styles/customStyles";
 import { languages } from "data/data";
@@ -7,6 +7,7 @@ import { isValidPhoneNumber } from "utils/validators";
 import { REQUIRED_FIELD, INVALID_PHONE_NUMBER } from "utils/constants";
 import StickyBar from "../StickyBar";
 import { type WizardProps } from "types/step.type";
+import { type Option } from "types/option.type";
 import "styles/Form.css";
 import { useFormContext } from "context/AppContext";
 
@@ -24,8 +25,8 @@ const FirstStep: React.FC<WizardProps> = ({
     phoneNumber: ""
   });
 
-  const handleLanguageChange = useCallback((selectedOptions: any) => {
-    setFormData((prevData) => ({ ...prevData, languages: selectedOptions }));
+  const handleLanguageChange = useCallback((selectedOptions: MultiValue<Option>) => {
+    setFormData((prevData) => ({ ...prevData, languages: [...selectedOptions] }));
     setErrors((prevErrors) => ({ ...prevErrors, languages: "" }));
     if (selectedOptions.length === 0) {
       setErrors((prevErrors) => ({ ...prevErrors, languages: REQUIRED_FIELD }));

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useFormContext, initialState } from "context/AppContext";
 
 interface FinalStepProps {

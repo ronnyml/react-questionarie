@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import Select, { type ActionMeta } from "react-select";
+import Select, { type ActionMeta, type SingleValue } from "react-select";
 
 import { multiDropdownStyles } from "styles/customStyles";
 import { insurances, specialities } from "data/data";
@@ -24,9 +24,8 @@ const SecondStep: React.FC<WizardProps> = ({
     description: ""
   });
 
-  const handleChange = useCallback((selectedOption: any, actionMeta: ActionMeta<Option>) => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (selectedOption) {
+  const handleChange = useCallback((selectedOption: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
+    if (selectedOption !== null) {
       const { name } = actionMeta;
       const value = selectedOption.value;
       setFormData((prevData) => ({ ...prevData, [name as string]: value }));
@@ -73,6 +72,7 @@ const SecondStep: React.FC<WizardProps> = ({
         <form id="form" onSubmit={handleSubmit}>
           <div className="field">
             <Select
+              isMulti={false}
               name="insurance"
               value={insurances.find(i => i.value === formData.insurance)}
               options={insurances}
@@ -89,6 +89,7 @@ const SecondStep: React.FC<WizardProps> = ({
 
           <div className="field">
             <Select
+              isMulti={false}
               name="speciality"
               defaultValue={specialities.find(s => s.value === formData.speciality)}
               options={specialities}

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { type WizardProps } from "types/step.type";
 
 const StickyBar: React.FC<WizardProps> = ({

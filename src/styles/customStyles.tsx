@@ -4,7 +4,7 @@ import { isMobileDevice } from "utils/utils";
 
 const isMobile = isMobileDevice();
 
-export const multiDropdownStyles: StylesConfig<Option, true> = {
+export const multiDropdownStyles: StylesConfig<Option, boolean> = {
 
   control: (styles) => ({
     ...styles,
@@ -59,7 +59,7 @@ export const multiDropdownStyles: StylesConfig<Option, true> = {
   })
 };
 
-export const errorStyles: StylesConfig<Option, true> = {
+export const errorStyles: StylesConfig<Option, boolean> = {
   control: (styles) => ({
     ...styles,
     border: "3px solid #DCA592 !important",
