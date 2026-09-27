@@ -1,68 +1,86 @@
 import { type StylesConfig } from "react-select";
 import { type Option } from "types/option.type";
-import { isMobileDevice } from "utils/utils";
 
-const isMobile = isMobileDevice();
+const SURFACE_ALT = "#1b1e27";
+const BORDER = "#2a2e3a";
+const TEXT_PRIMARY = "#f4f5f7";
+const TEXT_SECONDARY = "#9aa0ae";
+const ACCENT = "#a855f7";
+const ACCENT_END = "#ec4899";
 
 export const multiDropdownStyles: StylesConfig<Option, boolean> = {
 
-  control: (styles) => ({
+  control: (styles, state) => ({
     ...styles,
-    width: isMobile ? "320px" : "425px",
+    width: "100%",
     margin: "5px",
     borderRadius: "4px",
     fontFamily: "Nunito Sans",
     fontWeight: "400",
     fontSize: "16px",
     lineHeight: "24px",
-    border: "1px solid #CBCDD3",
-    boxShadow: "0 !important",
+    backgroundColor: SURFACE_ALT,
+    border: `1px solid ${state.isFocused ? ACCENT : BORDER}`,
+    boxShadow: state.isFocused ? `0 0 0 3px rgba(168, 85, 247, 0.25)` : "0 !important",
     "&:hover": {
-      border: "0 !important"
-    },
-    filter:
-      "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
+      border: `1px solid ${ACCENT}`
+    }
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+    color: TEXT_PRIMARY
+  }),
+  input: (styles) => ({
+    ...styles,
+    color: TEXT_PRIMARY
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: SURFACE_ALT,
+    border: `1px solid ${BORDER}`
   }),
   option: (styles, state) => ({
     ...styles,
-    color: "#58423A",
-    backgroundColor: state.isSelected ? "#DCA592" : "white",
+    color: TEXT_PRIMARY,
+    backgroundColor: state.isSelected ? ACCENT : "transparent",
     ":hover": {
-      backgroundColor: "#DCA592"
+      backgroundColor: state.isSelected ? ACCENT : "rgba(168, 85, 247, 0.18)"
     }
   }),
   multiValue: (styles) => ({
     ...styles,
     boxSizing: "border-box",
-    background: "#F8EDE9",
+    background: `linear-gradient(135deg, ${ACCENT} 0%, ${ACCENT_END} 100%)`,
     borderRadius: "12px",
     gap: "2px",
     margin: "2px",
-    padding: "2px",
-    ":hover": {
-      backgroundColor: "#DCA592"
-    }
+    padding: "2px"
   }),
   multiValueLabel: (styles) => ({
     ...styles,
-    color: "#58423A",
-
+    color: "#fff",
     fontWeight: "600",
     fontSize: "12px",
     lineHeight: "16px"
   }),
   multiValueRemove: (styles) => ({
     ...styles,
+    color: "#fff",
     ":hover": {
-      backgroundColor: "#DCA592"
+      backgroundColor: "rgba(255, 255, 255, 0.25)",
+      color: "#fff"
     }
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: TEXT_SECONDARY
   })
 };
 
 export const errorStyles: StylesConfig<Option, boolean> = {
   control: (styles) => ({
     ...styles,
-    border: "3px solid #DCA592 !important",
+    border: `2px solid ${ACCENT_END} !important`,
     boxShadow: "0 !important",
     "&:hover": {
       boxShadow: "0 !important"

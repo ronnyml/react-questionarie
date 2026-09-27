@@ -16,6 +16,8 @@
 }
 
 .field {
+  width: 400px;
+  max-width: 100%;
   margin: 10px;
 }
 
@@ -31,13 +33,17 @@ input::placeholder {
   height: 25px;
   margin: 5px;
   padding: 5px 10px;
-  background: #ffffff;
-  color: #636973;
-  border: 1px solid #cbcdd3; ;
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
   border-radius: 4px;
   outline: none;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--accent-mid);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
 }
 
 .textarea {
@@ -45,15 +51,15 @@ input::placeholder {
 }
 
 .css-1jqq78o-placeholder, input::placeholder, textarea::placeholder {
-  color: #b0b5bc;
+  color: var(--text-secondary);
 }
 
 .border-error {
-    border: 3px solid #DCA592;
+  border: 2px solid var(--accent-end);
 }
 
 .error {
-  color: #d94b4b;
+  color: #f87171;
   display: block;
   font-weight: 400;
   font-size: 12px;
@@ -66,7 +72,8 @@ input::placeholder {
   bottom: 0;
   width: 100%;
   height: 80px;
-  background: #FFFFFF;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -85,30 +92,38 @@ input::placeholder {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .save-continue-button, .restart-button {
-  background: #F18A8D;
-  color: #FFF;
+  background: var(--gradient-brand);
+  color: #fff;
 }
 
 .go-back-button {
-  background: #E5E6E9;
-  color: #F18A8D;
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
 }
 
 .go-back-button:hover {
-  background: #F18A8D;
-  color: #FFF;
+  border-color: var(--accent-mid);
+  color: var(--accent-mid);
+  transform: translateY(-1px);
 }
 
 .save-continue-button:hover, .restart-button:hover {
-  background: #f0777b;
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
+  transform: translateY(-1px);
 }
 
 .save-continue-button:disabled {
-  background-color: #FCE8E8;;
+  background: var(--bg-surface-alt);
+  color: var(--text-secondary);
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .restart-button {
@@ -126,6 +141,11 @@ input::placeholder {
     margin: 10px auto;
     display: flex;
     align-items: center;
+  }
+
+  .field {
+    width: 300px;
+    margin: 10px auto;
   }
 
   .sticky-bottom-bar {
