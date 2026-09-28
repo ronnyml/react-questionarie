@@ -33,13 +33,17 @@ const ThirdStep: React.FC<WizardProps> = ({
   );
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { name } = event.target;
+    const value = event.target.value.trim();
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (value === "") {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: REQUIRED_FIELD }));
+    } else if (name === "email" && !isValidEmail(value)) {
+      setErrors((prevErrors) => ({ ...prevErrors, email: INVALID_EMAIL }));
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     }
-  }, []
+  }, [setFormData]
   );
 
   const handleSubmit = useCallback((event: React.FormEvent) => {

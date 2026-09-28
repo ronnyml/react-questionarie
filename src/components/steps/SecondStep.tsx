@@ -35,13 +35,16 @@ const SecondStep: React.FC<WizardProps> = ({
   );
 
   const handleBlur = useCallback((fieldName: keyof ProviderData) => () => {
-    const fieldValue = formData[fieldName];
+    const fieldValue = formData[fieldName].trim();
+    if (fieldName === "description") {
+      setFormData((prevData) => ({ ...prevData, description: fieldValue }));
+    }
     if (fieldValue === "") {
       setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: REQUIRED_FIELD }));
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: "" }));
     }
-  }, [formData]
+  }, [formData, setFormData]
   );
 
   const handleTextAreaChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {

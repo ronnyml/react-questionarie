@@ -50,7 +50,9 @@ const FirstStep: React.FC<WizardProps> = ({
   }, [formData]);
 
   const handleInputBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { name } = event.target;
+    const value = event.target.value.trim();
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     if (value === "") {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: REQUIRED_FIELD }));
     } else if (name === "phoneNumber" && !isValidPhoneNumber(value)) {
@@ -58,7 +60,7 @@ const FirstStep: React.FC<WizardProps> = ({
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     }
-  }, []
+  }, [setFormData]
   );
 
   const handleSubmit = useCallback((event: React.FormEvent) => {
