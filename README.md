@@ -5,6 +5,10 @@ user through personal, provider, and contact information, validating each
 step before letting them continue and collecting the responses in a shared
 form context.
 
+![React Questionarie screenshot](docs/screenshot.png)
+
+Live demo: [react-questionarie.vercel.app](https://react-questionarie.vercel.app/)
+
 ## Tech stack
 
 - [React 19](https://react.dev/) + TypeScript
