@@ -62,6 +62,7 @@ const ThirdStep: React.FC<WizardProps> = ({
               type="email"
               className={`form-input ${(errors.email !== "") ? "border-error" : ""}`}
               name="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -76,6 +77,7 @@ const ThirdStep: React.FC<WizardProps> = ({
               type="text"
               className={`form-input ${(errors.address !== "") ? "border-error" : ""}`}
               name="address"
+              autoComplete="street-address"
               value={formData.address}
               onChange={handleChange}
               onBlur={handleBlur}

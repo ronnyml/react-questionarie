@@ -92,6 +92,7 @@ const FirstStep: React.FC<WizardProps> = ({
               type="text"
               className={`form-input ${errors.firstName !== "" ? "border-error" : ""}`}
               name="firstName"
+              autoComplete="given-name"
               value={formData.firstName}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
@@ -107,6 +108,7 @@ const FirstStep: React.FC<WizardProps> = ({
               type="text"
               className={`form-input ${(errors.lastName !== "") ? "border-error" : ""}`}
               name="lastName"
+              autoComplete="family-name"
               value={formData.lastName}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
@@ -138,11 +140,12 @@ const FirstStep: React.FC<WizardProps> = ({
 
           <div className="field">
             <input
-              type="text"
+              type="tel"
               className={`form-input ${
                 (errors.phoneNumber !== "") ? "border-error" : ""
               }`}
               name="phoneNumber"
+              autoComplete="tel"
               value={formData.phoneNumber}
               onChange={handleInputChange}
               onBlur={handleInputBlur}

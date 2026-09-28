@@ -41,6 +41,15 @@ input::placeholder {
   box-shadow: 0 0 0 3px var(--accent-wash);
 }
 
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--card) inset;
+  box-shadow: 0 0 0 1000px var(--card) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .textarea {
   height: 96px;
   padding: 12px 14px;
@@ -109,8 +118,9 @@ input::placeholder {
 }
 
 .save-continue-button:disabled {
-  background: var(--card-alt);
-  color: var(--muted);
+  background: var(--accent);
+  opacity: 0.35;
+  color: #fff;
   cursor: not-allowed;
 }
 
