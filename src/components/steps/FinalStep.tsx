@@ -12,7 +12,7 @@ const FinalStep: React.FC<FinalStepProps> = ({ restart }) => {
   };
 
   return (
-    <div>
+    <div className="final-step">
       <button type="button" className="restart-button" onClick={handleOnClick}>
         Restart questionnaire
       </button>

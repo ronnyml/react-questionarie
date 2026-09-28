@@ -1,89 +1,91 @@
 import { type StylesConfig } from "react-select";
 import { type Option } from "types/option.type";
 
-const SURFACE_ALT = "#1b1e27";
-const BORDER = "#2a2e3a";
-const TEXT_PRIMARY = "#f4f5f7";
-const TEXT_SECONDARY = "#9aa0ae";
-const ACCENT = "#a855f7";
-const ACCENT_END = "#ec4899";
+const CARD = "#ffffff";
+const LINE = "#d8dee2";
+const INK = "#1c2430";
+const MUTED = "#667085";
+const ACCENT = "#2f7d6b";
+const ACCENT_WASH = "#e4efec";
+const DANGER = "#c0392b";
 
 export const multiDropdownStyles: StylesConfig<Option, boolean> = {
 
   control: (styles, state) => ({
     ...styles,
     width: "100%",
-    margin: "5px",
-    borderRadius: "4px",
-    fontFamily: "Nunito Sans",
+    minHeight: "44px",
+    borderRadius: "8px",
+    fontFamily: "Inter",
     fontWeight: "400",
-    fontSize: "16px",
-    lineHeight: "24px",
-    backgroundColor: SURFACE_ALT,
-    border: `1px solid ${state.isFocused ? ACCENT : BORDER}`,
-    boxShadow: state.isFocused ? `0 0 0 3px rgba(168, 85, 247, 0.25)` : "0 !important",
+    fontSize: "15px",
+    lineHeight: "22px",
+    backgroundColor: CARD,
+    border: `1px solid ${state.isFocused ? ACCENT : LINE}`,
+    boxShadow: state.isFocused ? `0 0 0 3px ${ACCENT_WASH}` : "none",
     "&:hover": {
       border: `1px solid ${ACCENT}`
     }
   }),
   singleValue: (styles) => ({
     ...styles,
-    color: TEXT_PRIMARY
+    color: INK
   }),
   input: (styles) => ({
     ...styles,
-    color: TEXT_PRIMARY
+    color: INK
   }),
   menu: (styles) => ({
     ...styles,
-    backgroundColor: SURFACE_ALT,
-    border: `1px solid ${BORDER}`
+    backgroundColor: CARD,
+    border: `1px solid ${LINE}`,
+    boxShadow: "0 8px 24px rgba(28, 36, 48, 0.12)"
   }),
   option: (styles, state) => ({
     ...styles,
-    color: TEXT_PRIMARY,
+    color: INK,
     backgroundColor: state.isSelected ? ACCENT : "transparent",
     ":hover": {
-      backgroundColor: state.isSelected ? ACCENT : "rgba(168, 85, 247, 0.18)"
+      backgroundColor: state.isSelected ? ACCENT : ACCENT_WASH
     }
   }),
   multiValue: (styles) => ({
     ...styles,
     boxSizing: "border-box",
-    background: `linear-gradient(135deg, ${ACCENT} 0%, ${ACCENT_END} 100%)`,
-    borderRadius: "12px",
+    background: ACCENT_WASH,
+    borderRadius: "6px",
     gap: "2px",
     margin: "2px",
     padding: "2px"
   }),
   multiValueLabel: (styles) => ({
     ...styles,
-    color: "#fff",
+    color: ACCENT,
     fontWeight: "600",
     fontSize: "12px",
     lineHeight: "16px"
   }),
   multiValueRemove: (styles) => ({
     ...styles,
-    color: "#fff",
+    color: ACCENT,
     ":hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.25)",
+      backgroundColor: ACCENT,
       color: "#fff"
     }
   }),
   placeholder: (styles) => ({
     ...styles,
-    color: TEXT_SECONDARY
+    color: MUTED
   })
 };
 
 export const errorStyles: StylesConfig<Option, boolean> = {
   control: (styles) => ({
     ...styles,
-    border: `2px solid ${ACCENT_END} !important`,
-    boxShadow: "0 !important",
+    border: `1px solid ${DANGER} !important`,
+    boxShadow: "none",
     "&:hover": {
-      boxShadow: "0 !important"
+      boxShadow: "none"
     }
   })
 };
