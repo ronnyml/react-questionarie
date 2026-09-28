@@ -19,7 +19,7 @@ Live demo: [react-questionarie.vercel.app](https://react-questionarie.vercel.app
 
 ## Getting started
 
-Requires Node.js 20+.
+Requires Node.js 22.12+ (see `engines` in `package.json`).
 
 ```bash
 npm install
