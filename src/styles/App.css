@@ -20,6 +20,11 @@
   box-sizing: border-box;
 }
 
+html {
+  background: var(--page);
+  color-scheme: dark;
+}
+
 body {
   min-height: 100vh;
   background: var(--page);
@@ -179,6 +184,6 @@ body {
   }
 
   .step-name, .step-active {
-    display: none;
+    font-size: 10px;
   }
 }
